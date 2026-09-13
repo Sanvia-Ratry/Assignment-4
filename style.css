@@ -11,19 +11,19 @@ h5,
 h6 {
   margin: 0;
 }
-h1 {
+h1,
+.not-applied,
+.place-holder h2 {
   color: #002c5c;
 }
 body {
   font-family: "Geist", sans-serif;
   max-width: 1110px;
   margin: 60px auto;
-
   background-color: #f8fafc;
 }
 #count {
   margin-top: 20px;
-
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(3, 1fr);
@@ -84,16 +84,15 @@ ul li,
 }
 #job-container,
 #Interviewed,
-#Rejected {
+#Rejected,
+.job-card,
+.place-holder {
   display: flex;
   gap: 16px;
   flex-direction: column;
 }
 
 .job-card {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
   align-items: flex-start;
   border-radius: 8px;
   background-color: #ffffff;
@@ -132,7 +131,6 @@ ul li,
   border: none;
   font-size: 14px;
   font-weight: 600;
-  color: #002c5c;
 }
 .job-heading-wrap {
   display: flex;
@@ -161,16 +159,12 @@ h1 {
   background-color: white;
   border-radius: 8px;
   padding: 60px;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.06);
 }
-.place-holder h2 {
-  color: #002c5c;
-}
+
 .green-highlight {
   background-color: rgba(26, 142, 26, 0.523);
 }
