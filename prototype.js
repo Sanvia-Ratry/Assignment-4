@@ -42,6 +42,7 @@ function activeList(e) {
     interview_list.classList.remove("blue");
     reject_list.classList.remove("blue");
   }
+  dynamicSidebarCount(e.target.id);
 }
 
 all_job_container.addEventListener("click", toggle);
@@ -58,30 +59,33 @@ function toggle(e) {
     count("delete");
     count("cancelled");
     count("interview");
-    return;
+    dynamicSidebarCount();
   }
   if (e.target.tagName !== "BUTTON") {
+    console.log("not button....");
     return;
-  }
-  if (e.target.classList.contains("btn-interview")) {
-    const div = e.target.closest(".job-card");
-    section_interview.append(div);
-    count("interview");
-    count("cancelled");
-    updateUI("interview", section_interview);
-    updateUI("cancelled", section_rejected);
-    updateBadge("interview", div);
-  }
-  if (e.target.classList.contains("btn-cancelled")) {
-    const div = e.target.closest(".job-card");
-    section_rejected.append(div);
-    console.log("cancelled clicked:");
-    console.log(section_rejected);
-    count("cancelled");
-    count("interview");
-    updateUI("cancelled", section_rejected);
-    updateUI("interview", section_interview);
-    updateBadge("cancelled", div);
+  } else {
+    if (e.target.classList.contains("btn-interview")) {
+      const div = e.target.closest(".job-card");
+      section_interview.append(div);
+      count("interview");
+      count("cancelled");
+      updateUI("interview", section_interview);
+      updateUI("cancelled", section_rejected);
+      updateBadge("interview", div);
+    }
+    if (e.target.classList.contains("btn-cancelled")) {
+      const div = e.target.closest(".job-card");
+      section_rejected.append(div);
+      console.log("cancelled clicked:");
+      console.log(section_rejected);
+      count("cancelled");
+      count("interview");
+      updateUI("cancelled", section_rejected);
+      updateUI("interview", section_interview);
+      updateBadge("cancelled", div);
+    }
+    dynamicSidebarCount();
   }
 }
 function count(str) {
@@ -104,7 +108,25 @@ function count(str) {
     const defaultCount = document.getElementById("total-job");
     const count = div_count.length;
     defaultCount.querySelector("p").innerText = count;
-    console.log("count is working....", count);
+  }
+}
+function dynamicSidebarCount() {
+  const activeTab = document.querySelector("ul li.blue");
+  const sideCount = document.querySelector("#sidecount-wrapper p");
+  const total = document.querySelectorAll(".job-card");
+
+  if (activeTab.id === "interview-list") {
+    const div_count = document.querySelectorAll("#Interviewed .job-card");
+    const count = div_count.length;
+    sideCount.innerText = count + ` of ${total.length} jobs`;
+  }
+  if (activeTab.id === "reject-list") {
+    const div_count = document.querySelectorAll("#Rejected .job-card");
+    const count = div_count.length;
+    sideCount.innerText = count + ` of ${total.length} jobs`;
+  }
+  if (activeTab.id === "default") {
+    sideCount.innerText = total.length + " jobs";
   }
 }
 function updateUI(str, element) {
@@ -152,5 +174,3 @@ function updateBadge(str, div) {
     badge.classList.add("red-highlight");
   }
 }
-
-// const job_card =
